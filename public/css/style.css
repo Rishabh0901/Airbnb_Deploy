@@ -1,0 +1,228 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important; /*This we have taken from google fonts*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*Here giving styling to container class of boilerplate.ejs in which all codes get embedded.*/
+
+.container{
+    flex: 1;
+}
+
+
+/*We are giving styling to navbar*/
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+/*Here, we are adding styling to the search bar and button in the navbar.*/
+
+/* 
+.search-btns {
+    background-color: #fe424d;
+    color: #ffff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+}
+
+.search-btns:hover {
+    background-color: #fe424d;
+    color: #ffff;
+}
+
+.search-btns i{
+  display: inline;
+  margin-right: 0.5rem;
+}
+
+.search-inp{
+  border-radius: 25px;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+  font-size: 1rem;
+} */
+
+
+/*We are giving styling to our main logo i.e. in navbar.*/
+.fa-airbnb{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/*We are giving styling to options of navbar.*/
+.nav-link{
+    color: #222222 !important;/*We are writing "!important" so that our custom styling overrides the styling of bootstrap*/
+}
+
+
+
+
+
+/*We are giving styling to footer*/
+
+.f-info-links a { /*We are removing undelines from the link privacy and terms.*/
+    text-decoration: none;
+    color: #222222;/*#222222 is used to darken the texts.*/
+}
+
+.f-info-links a:hover{/*We are adding this so that on placing the cursor on the link privacy and terms in footer they must get underlined.*/
+    text-decoration: underline;
+}
+
+/*We are writing below two to wrap the links and social media icons seperately.
+And to align all the things in footer vertically and horizontally.*/
+.f-info-links,
+ .f-info-socials, 
+.f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Here, we are giving styling to social media icon of footer.*/
+.f-info-socials i{
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+/*Here, we are giving styling to whole footer.*/
+.f-info{
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+
+
+/*Styling to index.ejs i.e. all listing page.*/
+
+/*Here, giving styling to the each whole card of the page i.e. having all listings i.e. index.ejs*/
+.listing-card{
+    border: none !important; /*We are writing "!important" so that our custom styling overrides the styling of bootstrap*/
+    margin-bottom: 2rem;
+}
+
+/*Here, giving styling to the each image within card of the page i.e. having all listings i.e. index.ejs*/
+.show-img{
+    border-radius: 1rem !important; /*We are writing "!important" so that our custom styling overrides the styling of bootstrap*/
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+/*Here, giving styling to the body within card(so that it get aligned with the image) of the page i.e. having all listings i.e. index.ejs*/
+.card-body{
+    padding: 0rem !important;
+}
+
+/*Here, giving styling to the body within card(so that it get aligned with the image) of the page i.e. having all listings i.e. index.ejs*/
+.card-text p{
+    font-weight: 400 !important;
+}
+
+/*Here giving styling to the price and title of each card on all listing page i.e index.ejs because, after making whole card an ancher tag title and price has got underlined
+so we are removing the line*/
+.listing-link{
+    text-decoration: none;
+
+}
+
+/*Here, giving styling as card effect to each card on all listing page i.e. index.ejs so that on hovering on each card there must be some effect*/
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+
+
+/*Here we are giving styling to create listing page i.e. new.ejs*/
+/*Giving style to add button*/
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+
+/*Here we are giving styling to edit listing page i.e. edit.ejs*/
+/*Giving style to edit button*/
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+
+/*Here, giving styling to the page having details about specific listing i.e. show.ejs*/
+.show-img{
+    height: 30vh;
+}
+/*Giving style to delete and esit button*/
+.btns{
+    display: flex;
+}
+/*Giving style to card*/
+.showcard{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* 
+.edit-img{
+    width: 15rem !important;
+    height: 10rem !important;
+} */
+
+
+
+/*Here, we are giving styling to the icons and tax toggle in index.ejs*/
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p{
+    font-size: 0.8rem;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-toggle{
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.5rem;
+    padding: 1rem;
+    margin-left: 0rem;
+    display: flex;  
+    align-items: center;
+}
+
+
+/*Here, we are adding styling for our map. i.e. in show.ejs file.*/
+
+#map{
+    height: 400px;
+    width: 110vb;
+}

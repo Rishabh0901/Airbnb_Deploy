@@ -1,0 +1,35 @@
+<!-- Here, class "alert alert-success" has been taken so that on creating a new listing a popup message comes 
+     "New Listing Created!" with a green alert-->
+<!-- Here, class "alert-dismissible fade show" has been used so that on clicking the cross button on flash message the
+     message gets disappeared. -->
+<!-- These all classes have been taken from the bootstrap website "https://getbootstrap.com/docs/5.3/components/alerts/"-->
+
+<% if(success && success.length) {%>
+<div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert"> 
+    <%= success %> 
+    <button 
+        type="button" 
+        class="btn-close" 
+        data-bs-dismiss="alert" 
+        aria-label="Close"
+    ></button>
+</div>
+<% } %>
+
+
+<!-- Here, class "alert alert-danger" has been taken so that on searching for a listing that has already been deleted 
+     a popup message comes "Listing you requested does not exist!" with a red alert-->
+<!-- Here, class "alert-dismissible fade show" has been used so that on clicking the cross button on flash message the
+     message gets disappeared. -->
+<!-- These all classes have been taken from the bootstrap website "https://getbootstrap.com/docs/5.3/components/alerts/"-->
+<% if(error && error.length) {%>
+    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert"> 
+        <%= error %> 
+        <button 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close"
+        ></button>
+    </div>
+    <% } %>

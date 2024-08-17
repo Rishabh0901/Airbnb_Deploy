@@ -1,0 +1,109 @@
+<!--This file will get open after clicking on "Create new listing" button on main page through NEW Route.-->
+
+<!--There is no boiler plate code of HTML here.-->
+
+<%- layout('/layouts/boilerplate') %> <!--Writing this line so that we can use sub template code of boilerplate.ejs-->
+
+<div class="row mt-3">
+    <div class="col-8 offset-2"><!--Here, offset 2 will bring everything in the middle.-->
+        <h3><b>Create a new Listing</b></h3>
+        <br/>
+            <form 
+                method="POST" 
+                action="/listings" 
+                novalidate 
+                class="needs-validation" 
+                enctype="multipart/form-data"><!--Here, we have set the enctype="multipart/form-data" so that our form can send files/photos to backend.-->
+                <!--Here, novalidate is written so that we can use Bootstrap custom form validation message i.e. browser independent
+                    because, it will non validate the browser default messages.-->
+
+                <div class="mb-3"><!--Here we have written "mb-3" because, it is a bootstrap class which will be give margin bottom spacing 3 and we have writtrn it in all div-->
+                    <label for="title" class="form-label">Title</label>
+
+                    <!--name="listing[title]" we will writing this beacuse we are making them as a object i.e. listing value and key title.
+                        So, we are making key value pair of lsiting object.-->
+                    <!--It will be same for rest all like description, image, price, location, country, etc.-->
+                    <input 
+                        name="listing[title]" 
+                        placeholder="Add a catchy title" 
+                        type="text" 
+                        class="form-control"
+                        required
+                    />
+                    <div class="valid-feedback">Title looks good</div>
+                    <div class="invalid-feedback">Please give a title</div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea 
+                        name="listing[description]" 
+                        placeholder="Enter a breif description."
+                        type="text"
+                        class="form-control"
+                        required
+                    ></textarea>
+                    <div class="invalid-feedback">Please enter short description</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload  Image</label>
+                    <input 
+                        name="listing[image][url]" 
+                        type="file"
+                        class="form-control"
+                    />
+                    required
+                </div>
+                
+
+                <div class="row"> <!--Here putting price and coountry within a same div so that they come in same line-->
+
+                    <div class="mb-3 col-md-4"><!--Here we have added col-md-4 with price and col-md-8 with country so that in medium screen 
+                                                   size or larger than medium size both price and location must come in same line in which price
+                                                   will take 4 size and country will take 8 size. But in screen size smaller than medium they both 
+                                                   go in different lines.-->
+
+                        <label for="price" class="form-label">Price</label>
+                        <input 
+                            name="listing[price]" 
+                            placeholder="&#8377; 1200" 
+                            class="form-control"
+                            required
+                        />
+                        <div class="invalid-feedback">Please enter a valid price.</div>
+                    </div>
+
+
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input 
+                            name="listing[country]" 
+                            placeholder="India" 
+                            type="text"
+                            class="form-control"
+                            required
+                        />
+                        <div class="invalid-feedback">Please enter a valid country name</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input 
+                        name="listing[location]" 
+                        placeholder="Jaipur, Rajasthan" 
+                        type="text"
+                        class="form-control"
+                        required
+                    />
+                    <div class="invalid-feedback">Please enter a valid Location</div>
+                </div>
+
+                <button class="btn btn-dark add-btn mt-3">Add Listing</button><!--Here we have written "btn-dark" because, it is a bootstrap class which will give dark background color to button-->
+                                                                         <!--Here, we have given class "add-btn" so that we can give custom dtyling to button.-->
+            </form>
+        </div>
+    </div>
+   

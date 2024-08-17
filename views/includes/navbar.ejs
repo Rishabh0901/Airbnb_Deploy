@@ -1,0 +1,78 @@
+<style>
+    .search-btn{
+        background-color: #fe424d;
+        color: #ffff;
+        border-radius: 25px;
+        padding: 0 1rem 0 1rem;
+    }
+
+    .search-btn:hover{
+        background-color: #fe424d;
+        color: #ffff
+    }
+
+    .search-btn i{
+      display: inline;
+      margin-right: 0.5rem;
+    }
+
+    .search-inp{
+      border-radius: 25px;
+      padding: 0.5rem 3rem 0.5rem 3rem;
+      font-size: 1rem;
+    }
+</style>
+
+
+<!--CODE COPIET FROM: https://getbootstrap.com/docs/5.3/components/navbar/-->
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top"><!--Making navbar-expand-lg to navbar-expand-md so that navbar does'nt gets hide in medium size webpage. It only gets shrink in small size-->
+                                                                 <!--We will add a class "border-bottom" which is a bootstrap class by which anything will have a line in it's bottom.-->
+                                                                 <!--We will add a class "sticky-top" so that on scrolling our website navbar does'nt gets scroled up. For fixing the navbar.-->
+                                                                 
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listing"><i class="fa-brands fa-airbnb"></i></a><!--Here; <i class="fa-brands fa-airbnb"> this code we have copied from 
+                                                                                  website fontawesome "https://fontawesome.com/icons/airbnb?f=brands&s=solid"
+                                                                                  and this will show the logo of our website on navbar-->
+      <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup" 
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/listings">Explore</a>
+        </div>
+
+        <!--We are creating a div for adding a serach box in navbar by copying the code from the bootstarp website 
+            "https://getbootstrap.com/docs/5.3/components/navbar/"-->
+        <div class="navbar-nav ms-auto">
+          <form class="d-flex" role="search">
+            <input 
+              class="form-control me-2 search-inp" 
+              type="search" 
+              placeholder="Search destinations"
+            >
+            <button class="btn search-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+        </div>
+
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+          <% if(!currUser){ %> <!--If, "req.user" that has been defined as the currUser as the locals variable in the app.js
+                                   file is undefined then, sigup and login button must be visible-->
+          <a class="nav-link active" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+          <% } %>
+          <% if(currUser){ %><!--If, "req.user" that has been defined as the currUser as the locals variable in the app.js
+                                 file has an object having information then, logout button must be visible-->
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>

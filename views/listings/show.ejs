@@ -1,0 +1,175 @@
+<!--This file will show data of particular listing and the request for opening this file will come from index.ejs file through app.js file-->
+
+<!--There is no boiler plate code of HTML here.-->
+<% layout('/layouts/boilerplate') %>
+
+<!--We are writing this script code because, here we are saving the enviorment variable of MAP_TOKEN in js variable so 
+    that we can use it in map.js file.-->
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>";
+    const listing = <%- JSON.stringify(listing) %>
+</script>
+
+<div class="row mt-3">
+    <div class="col-8 offset-3"><!--This code will bring all the contents of page at center.-->
+        <h3><%= listing.title %></h3>
+    </div>
+        <div class="card col-6 offset-3 show-card listing-card"> <!--We have made this card div to give styling to the specific listings.-->
+
+            <!--We have copied below code from bootstrap website "https://getbootstrap.com/docs/5.3/components/card/" to give styling to image.-->
+            <!--We have written class name "show-img" so that we can give our custom styling to image.-->
+            <img                
+            src="<%= listing.image.url %>" 
+            class="card-img-top show-img"   
+            alt="listing_image"
+            /> 
+            <div class="card-body">
+            <p class="card-text">Owned by: <i><%= listing.owner.username %></i></p>
+            <p class="card-text"> <%= listing.description %> </p>
+            <p class="card-text"> &#8377; <%= listing.price.toLocaleString("en-In"); %> / night</p>
+            <p class="card-text"> <%= listing.country %> </p>
+            <p class="card-text"> <%= listing.location %> </p>    
+            </div>
+        </div> 
+</div>
+
+
+<!--Edit and delete button for listing.-->
+<% if(currUser && currUser._id.equals(listing.owner._id)) { %> <!--Here, if condition has been set to apply authorization.
+                                                               If, id of current user matches with id of user created the
+                                                               listing then, only edit and delete buttons will be displayed.
+                                                               Else they will remain hided.-->
+<div class="btns">
+    <a href="/listings/<%= listing._id %>/edit" 
+        class="btn btn-dark col-1 offset-3"
+        >Edit</a>
+
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button class="btn btn-dark offset-5 edit-btn">Delete</button>
+    </form>
+</div>
+<% } %>
+
+
+
+<!--div for review-->
+<div class="col-8 offset-3 mb-3">
+    
+    <% if(currUser) { %> <!-- We are adding this "if" for adding authorization to review. Because, now only logged in user will 
+                              able to see the review form. If currUser will have value then form will be visible and it has 
+                              a value only when user has loggedIn else form will not be visible.-->
+    <hr/>
+    <h4>Leave a Review</h4>
+    <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate class="needs-validation">
+        <!--We have commented this part rating-style slider because, we have added a new star style rating just below.-->
+        <!-- <div class="mb-3 mt-3">
+            <label for="Rating" class="form-label">Rating</label>
+            <input 
+                type="range" 
+                min="1" 
+                max="5" 
+                id="rating" 
+                name="review[rating]"
+                class="form-range"
+            />-->
+            <!-- Above we have given class="form-range" from bootstarp website "https://getbootstrap.com/docs/5.3/forms/range/" so to give effects to rating slider. -->
+        <!-- </div> --> 
+
+        <!--We have copied this below code from "https://github.com/LunarLogic/starability" Readme file. So that this code 
+        will add functionality to star rating.-->
+        <div class="mb-3 mt-3">
+            <label for="Rating" class="form-label">Rating</label>
+            <fieldset class="starability-slot">
+            <input 
+            type="radio" 
+            id="no-rate" 
+            class="input-no-rate" 
+            name="review[rating]" 
+            value="1" 
+            checked aria-label="No rating." 
+            />
+            <input 
+            type="radio" 
+            id="first-rate1" 
+            name="review[rating]" 
+            value="1" 
+            />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input 
+            type="radio" 
+            id="first-rate2" 
+            name="review[rating]" 
+            value="2" 
+            />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input 
+            type="radio" 
+            id="first-rate3" 
+            name="review[rating]" 
+            value="3" 
+            />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input 
+            type="radio" 
+            id="first-rate4" 
+            name="review[rating]" 
+            value="4" 
+            />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input 
+            type="radio" 
+            id="first-rate5" 
+            name="review[rating]" 
+            value="5" 
+            />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        <div class="mb-3 mt-3">
+            <label for="comment" class="form-label">Comments</label>
+            <textarea 
+            name="review[comment]" 
+            id="comment" 
+            cols="30" 
+            rows="5"
+            class="form-control"
+            required
+            ></textarea>
+            <div class="invalid-feedback">Please add some comments for Review.</div>
+        </div>
+        <button class="btn btn-outline-dark">Submit</button>
+    </form>
+    <hr/>
+    <% } %>
+    
+        <% if(listing.reviews.length > 0) { %>
+        <div class="row">
+            <p><b>All Reviews</b></p>
+            <% for(review of listing.reviews) { %>
+                <div class="card col-5 ms-3 mb-3"><!--classes are taken from bootstrap website:- "https://getbootstrap.com/docs/5.3/components/card/" "-->
+                    <div class="card-body">
+                        <h5 class="card-title"> <%= review.author.username %> </h5>
+                        <p 
+                            class="starability-result card-text" 
+                            data-rating="<%= review.rating %>"
+                        ></p>
+                        <p class="card-text"><%= review.comment %></p>
+                    </div>
+                    <% if(currUser && currUser._id.equals(review.author._id)) { %> <!--We have added this "if" so that the 
+                                                                                       delete button of review we only be 
+                                                                                       visible to author of review -->
+                    <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                    </form>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        <% } %>
+    </div>
+    <div class="col-8  offset-3 mb-3">
+        <h3>Where you'll be</h3>
+        <div id="map"></div>
+    </div>
+</div>
+
+<script src="/js/map.js"></script>
